@@ -1,0 +1,29 @@
+name: rust_fmt_auto_build_test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust_fmt_auto_build_test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: cargo fmt -- --check
+      run: cargo fmt -- --check
+
+    - name: cargo build
+      run: cargo build
+
+    - name: cargo test
+      run: cargo test
+      
