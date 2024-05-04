@@ -1,6 +1,6 @@
 [//]: # (auto_md_to_doc_comments segment start A)
 
-# automation_tasks_rs
+# cargo_auto_template_new_auto_for_cli
 
 **Automation tasks coded in Rust language for the workflow of Rust projects**  
 ***version: 1.0.0 date: 2024-05-04 author: [Bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/automation-tasks-rs/cargo_auto_template_new_auto_for_cli)***
@@ -14,7 +14,7 @@
  ![logo](https://raw.githubusercontent.com/automation-tasks-rs/cargo-auto/main/images/logo/logo_cargo_auto.svg)
  cargo_auto_template_new_auto_for_cli is part of the [automation_tasks_rs](https://github.com/automation-tasks-rs) project
 
-## The sub-project
+## The sub-project `automation_tasks_rs`
 
 In this sub-project `automation_tasks_rs`, you can write tasks that you need when compiling or managing your Rust project.  
 The simple `cargo build` and `cargo build --release` are sometimes not enough. We need to copy some files, to prepare some environment. It is nice to have `all` the tasks in one place with a sort order that new users can easily follow.  
