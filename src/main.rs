@@ -173,14 +173,14 @@ fn print_help() {
 
 /// all example commands in one place
 fn print_examples_cmd() {
-/*
-    println!(
-        r#"
-    {YELLOW}run examples:{RESET}
-{GREEN}cargo run --example plantuml1{RESET}
-"#
-    );
-*/
+    /*
+        println!(
+            r#"
+        {YELLOW}run examples:{RESET}
+    {GREEN}cargo run --example plantuml1{RESET}
+    "#
+        );
+    */
 }
 
 /// sub-command for bash auto-completion of `cargo auto` using the crate `dev_bestia_cargo_completion`
