@@ -25,7 +25,7 @@ This helper project is used in combination with the program `cargo-auto`. Instal
 cargo install cargo-auto
 ```
 
-You can use also the cargo bash completion program 
+You can use also the cargo bash completion program:
 
 ```bash
 cargo install dev_bestia_cargo_completion
@@ -39,11 +39,11 @@ In the main  project folder (where the Cargo.toml file is) run
 cargo auto
 ```
 
-You will get a list of possible tasks with descriptions.
+You will get a list of possible tasks with descriptions like `cargo auto build`, `cargo auto release`, `cargo auto doc`,...
 
 You can write any task you need. You have all the power of the Rust language under your fingertips.  
 You can use or write a library for some specific tasks you need.  
-There are crates with often used tasks: `cargo_auto_lib`, `cargo_auto_github_lib`, `cargo_auto_encrypt_secret_lib`.  
+There are crates with often-used tasks: `cargo_auto_lib`, `cargo_auto_github_lib`, `cargo_auto_encrypt_secret_lib`.  
 
 ## Open-source and free as a beer
 
