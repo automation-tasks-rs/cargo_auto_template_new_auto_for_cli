@@ -11,6 +11,7 @@
  ![rustlang](https://img.shields.io/badge/rustlang-orange)
  ![automation](https://img.shields.io/badge/automation-orange)
  ![workflow](https://img.shields.io/badge/workflow-orange)
+ ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
  ![logo](https://raw.githubusercontent.com/automation-tasks-rs/cargo-auto/main/images/logo/logo_cargo_auto.svg)
  cargo_auto_template_new_auto_for_cli is part of the [automation_tasks_rs](https://github.com/automation-tasks-rs) project
