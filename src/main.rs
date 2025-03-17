@@ -138,7 +138,10 @@ fn print_help() {
         r#"
   {YELLOW}Welcome to cargo-auto !{RESET}
   {YELLOW}This program automates your custom tasks when developing a Rust project.{RESET}
+  {YELLOW}Welcome to cargo-auto !{RESET}
+  {YELLOW}This program automates your custom tasks when developing a Rust project.{RESET}
 
+  {YELLOW}User defined tasks in automation_tasks_rs:{RESET}
   {YELLOW}User defined tasks in automation_tasks_rs:{RESET}
 {GREEN}cargo auto build{RESET} - {YELLOW}builds the crate in debug mode, fmt, increment version{RESET}
 {GREEN}cargo auto release{RESET} - {YELLOW}builds the crate in release mode, fmt, increment version{RESET}
@@ -171,14 +174,14 @@ fn print_help() {
 
 /// all example commands in one place
 fn print_examples_cmd() {
-/*
-    println!(
-        r#"
-    {YELLOW}run examples:{RESET}
+    /*
+        println!(
+            r#"
+  {YELLOW}run examples:{RESET}
 {GREEN}cargo run --example plantuml1{RESET}
-"#
-    );
-*/
+    "#
+        );
+    */
 }
 
 /// Sub-command for bash auto-completion of `cargo auto` using the crate `dev_bestia_cargo_completion`.
@@ -238,6 +241,7 @@ fn task_release() {
     cl::run_shell_command_static("cargo clippy --no-deps").unwrap_or_else(|e| panic!("{e}"));
     cl::run_shell_command_static("cargo build --release").unwrap_or_else(|e| panic!("{e}"));
 
+    #[cfg(target_family = "unix")]
     cl::ShellCommandLimitedDoubleQuotesSanitizer::new(r#"strip "target/release/{package_name}" "#)
         .unwrap_or_else(|e| panic!("{e}"))
         .arg("{package_name}", &cargo_toml.package_name())
@@ -283,7 +287,9 @@ fn task_doc() {
         .unwrap_or_else(|e| panic!("{e}"));
 
     // pretty html
+    #[cfg(target_family = "unix")]
     cl::auto_doc_tidy_html().unwrap_or_else(|e| panic!("{e}"));
+
     cl::run_shell_command_static("cargo fmt").unwrap_or_else(|e| panic!("{e}"));
     // message to help user with next move
     println!(
@@ -376,7 +382,7 @@ fn task_publish_to_crates_io() {
 {GREEN}{package_name} = "{version}"{RESET}
 
   {YELLOW}First write the content of the release in the RELEASES.md in the `## Unreleased` section, then{RESET}
-  {YELLOW}Then create the GitHub-Release for {tag_name_version}.{RESET}
+  {YELLOW}Then create the GitHub Release {tag_name_version}.{RESET}
 {GREEN}cargo auto github_new_release{RESET}
 "#
     );
@@ -423,29 +429,31 @@ fn task_github_new_release() {
 
     let release_id = json_value.get("id").unwrap().as_i64().unwrap().to_string();
     println!("  {YELLOW}Now uploading release asset. This can take some time if the files are big. Wait...{RESET}");
-    // compress files tar.gz
-    let tar_name = format!("{repo_name}-{tag_name_version}-x86_64-unknown-linux-gnu.tar.gz");
+    // Linux executable binary tar-gz-ed compress files tar.gz
+    let executable_path = format!("target/release/{repo_name}");
+    if std::fs::exists(&executable_path).unwrap(){
+        let compressed_name = format!("{repo_name}-{tag_name_version}-x86_64-unknown-linux-gnu.tar.gz");
 
-    cl::ShellCommandLimitedDoubleQuotesSanitizer::new(r#"tar -zcvf "{tar_name_sanitized_for_double_quote}" "target/release/{repo_name_sanitized_for_double_quote}" "#)
-        .unwrap_or_else(|e| panic!("{e}"))
-        .arg("{tar_name_sanitized_for_double_quote}", &tar_name)
-        .unwrap_or_else(|e| panic!("{e}"))
-        .arg("{repo_name_sanitized_for_double_quote}", &repo_name)
-        .unwrap_or_else(|e| panic!("{e}"))
-        .run()
-        .unwrap_or_else(|e| panic!("{e}"));
+        cl::ShellCommandLimitedDoubleQuotesSanitizer::new(r#"tar -zcvf "{compressed_name_sanitized_for_double_quote}" "{executable_path_sanitized_for_double_quote}" "#)
+            .unwrap_or_else(|e| panic!("{e}"))
+            .arg("{compressed_name_sanitized_for_double_quote}", &compressed_name)
+            .unwrap_or_else(|e| panic!("{e}"))
+            .arg("{executable_path_sanitized_for_double_quote}", &executable_path)
+            .unwrap_or_else(|e| panic!("{e}"))
+            .run()
+            .unwrap_or_else(|e| panic!("{e}"));
 
-    // upload asset
-    cgl::github_api_upload_asset_to_release(&github_owner, &repo_name, &release_id, &tar_name);
+        // upload asset
+        cgl::github_api_upload_asset_to_release(&github_owner, &repo_name, &release_id, &compressed_name);
 
-    cl::ShellCommandLimitedDoubleQuotesSanitizer::new(r#"rm "{tar_name_sanitized_for_double_quote}" "#)
-        .unwrap_or_else(|e| panic!("{e}"))
-        .arg("{tar_name_sanitized_for_double_quote}", &tar_name)
-        .unwrap_or_else(|e| panic!("{e}"))
-        .run()
-        .unwrap_or_else(|e| panic!("{e}"));
-    println!(r#"  {YELLOW}Asset uploaded. Open and edit the description on GitHub Releases in the browser.{RESET}"#);
-
+        cl::ShellCommandLimitedDoubleQuotesSanitizer::new(r#"rm "{compressed_name_sanitized_for_double_quote}" "#)
+            .unwrap_or_else(|e| panic!("{e}"))
+            .arg("{compressed_name_sanitized_for_double_quote}", &compressed_name)
+            .unwrap_or_else(|e| panic!("{e}"))
+            .run()
+            .unwrap_or_else(|e| panic!("{e}"));
+        println!(r#"  {YELLOW}Asset uploaded. Open and edit the description on GitHub Releases in the browser.{RESET}"#);
+    }
     // endregion: upload asset only for executables, not for libraries
 
     println!(r#"{GREEN}https://github.com/{github_owner}/{repo_name}/releases{RESET} "#);
