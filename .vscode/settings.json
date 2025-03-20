@@ -38,6 +38,7 @@
         "Prost",
         "reqwest",
         "rustdevuser",
+        "rustlang",
         "rustprojects",
         "serde",
         "sscanf",
