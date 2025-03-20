@@ -138,8 +138,6 @@ fn print_help() {
         r#"
   {YELLOW}Welcome to cargo-auto !{RESET}
   {YELLOW}This program automates your custom tasks when developing a Rust project.{RESET}
-  {YELLOW}Welcome to cargo-auto !{RESET}
-  {YELLOW}This program automates your custom tasks when developing a Rust project.{RESET}
 
   {YELLOW}User defined tasks in automation_tasks_rs:{RESET}
 {GREEN}cargo auto build{RESET} - {YELLOW}builds the crate in debug mode, fmt, increment version{RESET}
