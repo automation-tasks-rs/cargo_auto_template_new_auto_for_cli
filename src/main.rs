@@ -148,19 +148,19 @@ fn print_help() {
   {YELLOW}It is preferred to use SSH for git push to GitHub.{RESET}
   {YELLOW}<https://github.com/CRUSTDE-ContainerizedRustDevEnv/crustde_cnt_img_pod/blob/main/ssh_easy.md>{YELLOW}
   {YELLOW}On the very first commit, this task will initialize a new local git repository and create a remote GitHub repo.{RESET}
-  {YELLOW}For the GitHub API the task needs the Personal Access secret_token Classic from <https://github.com/settings/tokens>{RESET}
-  {YELLOW}You can choose to type the secret_token every time or to store it in a file encrypted with an SSH key.{RESET}
-  {YELLOW}Then you can type the passphrase of the private key every time. This is pretty secure.{RESET}
+  {YELLOW}For the GitHub API the task needs the Access secret token from OAuth2 device workflow.{RESET}
+  {YELLOW}The secret token will be stored in a file encrypted with your SSH private key.{RESET}
+  {YELLOW}You can type the passphrase of the private key for every usee. This is pretty secure.{RESET}
   {YELLOW}Somewhat less secure (but more comfortable) way is to store the private key in ssh-agent.{RESET}
 {GREEN}cargo auto publish_to_crates_io{RESET} - {YELLOW}publish to crates.io, git tag{RESET}
   {YELLOW}You need the API secret_token for publishing. Get the secret_token on <https://crates.io/settings/tokens>.{RESET}
-  {YELLOW}You can choose to type the secret_token every time or to store it in a file encrypted with an SSH key.{RESET}
-  {YELLOW}Then you can type the passphrase of the private key every time. This is pretty secure.{RESET}
+  {YELLOW}The secret token will be stored in a file encrypted with your SSH private key.{RESET}
+  {YELLOW}You can type the passphrase of the private key for every usee. This is pretty secure.{RESET}
   {YELLOW}Somewhat less secure (but more comfortable) way is to store the private key in ssh-agent.{RESET}
 {GREEN}cargo auto github_new_release{RESET} - {YELLOW}creates new release on GitHub{RESET}
-  {YELLOW}For the GitHub API the task needs the Personal Access secret_token Classic from <https://github.com/settings/tokens>{RESET}
-  {YELLOW}You can choose to type the secret_token every time or to store it in a file encrypted with an SSH key.{RESET}
-  {YELLOW}Then you can type the passphrase of the private key every time. This is pretty secure.{RESET}
+  {YELLOW}For the GitHub API the task needs the Access secret token from OAuth2 device workflow.{RESET}
+  {YELLOW}The secret token will be stored in a file encrypted with your SSH private key.{RESET}
+  {YELLOW}You can type the passphrase of the private key for every usee. This is pretty secure.{RESET}
   {YELLOW}Somewhat less secure (but more comfortable) way is to store the private key in ssh-agent.{RESET}
 
   {YELLOW}© 2025 bestia.dev  MIT License github.com/automation--tasks--rs/cargo-auto{RESET}
